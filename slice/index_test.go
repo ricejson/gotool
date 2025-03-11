@@ -47,7 +47,7 @@ func TestIndexOf(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			var src = tc.src
 			var dst = tc.dst
-			assert.Equal(t, tc.wantRes, IndexOf(src, dst))
+			assert.Equal(t, tc.wantRes, IndexOf[string](src, dst))
 		})
 	}
 }
@@ -111,7 +111,7 @@ func TestIndexOfFunc(t *testing.T) {
 			var src = tc.src
 			var dst = tc.dst
 			var compareTo = tc.compareTo
-			assert.Equal(t, tc.wantRes, IndexOfFunc(src, dst, compareTo))
+			assert.Equal(t, tc.wantRes, IndexOfFunc[string](src, dst, compareTo))
 		})
 	}
 }
@@ -158,7 +158,7 @@ func TestLastIndexOf(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			var src = tc.src
 			var dst = tc.dst
-			assert.Equal(t, tc.wantRes, LastIndexOf(src, dst))
+			assert.Equal(t, tc.wantRes, LastIndexOf[string](src, dst))
 		})
 	}
 }
@@ -222,7 +222,7 @@ func TestLastIndexOfFunc(t *testing.T) {
 			var src = tc.src
 			var dst = tc.dst
 			var compareTo = tc.compareTo
-			assert.Equal(t, tc.wantRes, LastIndexOfFunc(src, dst, compareTo))
+			assert.Equal(t, tc.wantRes, LastIndexOfFunc[string](src, dst, compareTo))
 		})
 	}
 }
@@ -269,7 +269,7 @@ func TestIndexOfAll(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			var src = tc.src
 			var dst = tc.dst
-			assert.Equal(t, tc.wantRes, IndexOfAll(src, dst))
+			assert.Equal(t, tc.wantRes, IndexOfAll[string](src, dst))
 		})
 	}
 }
@@ -333,7 +333,7 @@ func TestIndexOfAllFunc(t *testing.T) {
 			var src = tc.src
 			var dst = tc.dst
 			var compareTo = tc.compareTo
-			assert.Equal(t, tc.wantRes, IndexOfAllFunc(src, dst, compareTo))
+			assert.Equal(t, tc.wantRes, IndexOfAllFunc[string](src, dst, compareTo))
 		})
 	}
 }
