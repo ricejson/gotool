@@ -35,7 +35,7 @@ func TestMax(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			var slice = tc.slice
-			res, err := Max(slice)
+			res, err := Max[int](slice)
 			assert.Equal(t, tc.wantRes, res)
 			assert.Equal(t, tc.wantErr, err)
 		})
@@ -71,7 +71,7 @@ func TestMin(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			var slice = tc.slice
-			res, err := Min(slice)
+			res, err := Min[int](slice)
 			assert.Equal(t, tc.wantRes, res)
 			assert.Equal(t, tc.wantErr, err)
 		})
@@ -107,7 +107,7 @@ func TestSum(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			var slice = tc.slice
-			res, err := Sum(slice)
+			res, err := Sum[complex128](slice)
 			assert.Equal(t, tc.wantRes, res)
 			assert.Equal(t, tc.wantErr, err)
 		})
