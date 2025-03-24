@@ -31,6 +31,16 @@ func (l *LinkedList[T]) RemoveLast() (T, error) {
 	return l.list.Remove(l.list.Back()).(T), nil
 }
 
+// RemoveFirst 头删元素
+func (l *LinkedList[T]) RemoveFirst() (T, error) {
+	var zeroValue T
+	// 特殊判断为空的情况
+	if l.list.Len() == 0 {
+		return zeroValue, errors.New("list is empty")
+	}
+	return l.list.Remove(l.list.Front()).(T), nil
+}
+
 // GetLast 获取尾部元素
 func (l *LinkedList[T]) GetLast() (T, error) {
 	var zeroValue T
@@ -39,6 +49,16 @@ func (l *LinkedList[T]) GetLast() (T, error) {
 		return zeroValue, errors.New("list is empty")
 	}
 	return l.list.Back().Value.(T), nil
+}
+
+// GetFirst 获取头部元素
+func (l *LinkedList[T]) GetFirst() (T, error) {
+	var zeroValue T
+	// 特殊判断为空的情况
+	if l.list.Len() == 0 {
+		return zeroValue, errors.New("list is empty")
+	}
+	return l.list.Front().Value.(T), nil
 }
 
 // Size 链表元素个数
