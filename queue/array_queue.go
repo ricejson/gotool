@@ -37,7 +37,7 @@ func (q *ArrayQueue[T]) Poll() (T, error) {
 	// 判断队列是否为空
 	var zeroValue T
 	if q.IsEmpty() {
-		return zeroValue, errors.New("queue is full")
+		return zeroValue, errors.New("queue is empty")
 	}
 	var topValue = q.data[q.head]
 	q.head = (q.head + 1) % q.capacity
@@ -49,7 +49,7 @@ func (q *ArrayQueue[T]) Peek() (T, error) {
 	// 判断队列是否为空
 	var zeroValue T
 	if q.IsEmpty() {
-		return zeroValue, errors.New("queue is full")
+		return zeroValue, errors.New("queue is empty")
 	}
 	return q.data[q.head], nil
 }
@@ -61,10 +61,10 @@ func (q *ArrayQueue[T]) Size() int {
 
 // IsFull 判断队列是否已满
 func (q *ArrayQueue[T]) IsFull() bool {
-	return (q.tail+1)%q.capacity == q.head
+	return q.usedSize == q.capacity
 }
 
 // IsEmpty 判断队列是否为空
 func (q *ArrayQueue[T]) IsEmpty() bool {
-	return q.head == q.tail
+	return q.usedSize == 0
 }
