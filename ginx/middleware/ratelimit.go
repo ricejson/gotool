@@ -30,11 +30,25 @@ func NewRateLimiterBuilder(limiter ratelimit.RateLimiter, interval time.Duration
 func (builder *RateLimiterBuilder) Prefix(prefix string) *RateLimiterBuilder {
 	builder.prefix = prefix
 	return builder
+	// return &RateLimiterBuilder{
+	// 	limiter:  builder.limiter,
+	// 	interval: builder.interval,
+	// 	rate:     builder.rate,
+	// 	prefix:   prefix,
+	// 	key:      builder.key,
+	// }
 }
 
 func (builder *RateLimiterBuilder) Key(key string) *RateLimiterBuilder {
 	builder.key = key
 	return builder
+	// return &RateLimiterBuilder{
+	// 	limiter:  builder.limiter,
+	// 	interval: builder.interval,
+	// 	rate:     builder.rate,
+	// 	prefix:   builder.prefix,
+	// 	key:      key,
+	// }
 }
 
 func (builder *RateLimiterBuilder) generateKey(suffix string) string {
@@ -58,13 +72,23 @@ func (builder *RateLimiterBuilder) Build() gin.HandlerFunc {
 		if err != nil {
 			// 说明redis发生不可名状错误
 			// 这里直接进行限流
-			ctx.AbortWithStatus(http.StatusInternalServerError)
+			// ctx.AbortWithStatus(http.StatusInternalServerError)
+			ctx.JSON(http.StatusInternalServerError, gin.H{
+				"code":    500,
+				"message": "rate limiter internal error",
+			})
+			ctx.Abort()
 			return
 			// 你也可以激进一点，继续执行业务代码（但要有兜底措施）
 		}
 		if limit {
 			// 需要进行限流
-			ctx.AbortWithStatus(http.StatusTooManyRequests)
+			// ctx.AbortWithStatus(http.StatusTooManyRequests)
+			ctx.JSON(http.StatusTooManyRequests, gin.H{
+				"code":    429,
+				"message": "too many requests",
+			})
+			ctx.Abort()
 			return
 		}
 		// 放行
