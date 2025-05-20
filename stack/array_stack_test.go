@@ -2,9 +2,10 @@ package stack
 
 import (
 	"errors"
+	"testing"
+
 	"github.com/go-playground/assert/v2"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestArrayStack_Integration(t *testing.T) {
@@ -56,7 +57,11 @@ func TestArrayStack_Push(t *testing.T) {
 		inputArr []string
 		wantRes  Stack[string]
 	}{
-		{},
+		{
+			name:     "测试Push方法",
+			inputArr: []string{},
+			wantRes:  NewArrayStack[string](4),
+		},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {

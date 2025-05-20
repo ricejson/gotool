@@ -1,10 +1,10 @@
 package queue
 
 import (
-	"fmt"
 	"sync"
 	"testing"
-	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestArrayBlockingQueue_Integration(t *testing.T) {
@@ -17,16 +17,15 @@ func TestArrayBlockingQueue_Integration(t *testing.T) {
 		defer wg.Done()
 		for i := 1; i <= 100; i++ {
 			blockingQueue.Put(i)
-			fmt.Println("生产了: ", i)
 		}
 	}()
 	// 模拟消费者
 	go func() {
 		defer wg.Done()
 		for i := 1; i <= 100; i++ {
-			time.Sleep(time.Second * 2)
-			val, _ := blockingQueue.Take()
-			fmt.Println("消费了: ", val)
+			val, err := blockingQueue.Take()
+			assert.NoError(t, err)
+			assert.Equal(t, val, i)
 		}
 	}()
 	wg.Wait()

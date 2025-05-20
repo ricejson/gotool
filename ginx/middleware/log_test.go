@@ -1,11 +1,15 @@
+//go:build middleware
+// +build middleware
+
 package middleware
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ricejson/gotool/logx"
 	"net/http"
 	"testing"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ricejson/gotool/logx"
 )
 
 func TestLogMiddlewareBuilder_Build(t *testing.T) {
